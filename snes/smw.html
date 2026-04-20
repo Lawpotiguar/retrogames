@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Super Mario World - SNES</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #0f0;
+      font-family: 'Press Start 2P', monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #222;
+      padding: 20px;
+      border-bottom: 2px solid #0f0;
+    }
+    h1 { margin: 0; }
+    #game {
+      width: 640px;
+      height: 480px;
+      margin: 20px auto;
+      border: 3px solid #0f0;
+      background: #000;
+    }
+    .game{
+    display: flex;
+    align-items: center;
+justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 Super Mario World</h1>
+  </header>
+
+  <main>
+    <div class="game"style="width:640px;height:480px;max-width:100%">
+      <div id="game"></div>
+    </div>
+  </main>
+
+  <!-- Configuração do EmulatorJS -->
+  <script type="text/javascript">
+  EJS_player = '#game';
+  EJS_core = 'snes';
+  EJS_mouse = false;
+  EJS_multitap = false;
+
+  EJS_gameUrl = "smw.sfc";
+</script>
+<script src="https://www.emulatorjs.com/loader.js"></script>
+
+</body>
+</html>
+

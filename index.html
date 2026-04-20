@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>SNES Retro Games</title>
+  <style>
+    body {
+      font-family: 'Press Start 2P', monospace;
+      background-color: #111;
+      color: #0f0;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #222;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #0f0;
+    }
+    h1 { margin: 0; }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: #222;
+      border: 2px solid #0f0;
+      border-radius: 8px;
+      width: 200px;
+      margin: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      border-color: #ff0;
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-bottom: 2px solid #0f0;
+    }
+    .card a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #0f0;
+      font-size: 14px;
+    }
+    .card a:hover {
+      color: #ff0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 SNES Retro Games</h1>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Super Mario World -->
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/3/31/Super_Mario_World_Coverart.png" alt="Super Mario World">
+        <a href="snes/smw.html">Super Mario World</a>
+      </div>
+
+      <!-- Bomberman -->
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/4/4d/Super_Bomberman_Coverart.png" alt="Super Bomberman">
+        <a href="/snes/bomberman1">Super Bomberman</a>
+      </div>
+
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/8/8d/Super_Bomberman_2_Coverart.png" alt="Super Bomberman 2">
+        <a href="/snes/bomberman2">Super Bomberman 2</a>
+      </div>
+
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/2a/Super_Bomberman_3_Coverart.png" alt="Super Bomberman 3">
+        <a href="/snes/bomberman3">Super Bomberman 3</a>
+      </div>
+
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/4/4c/Super_Bomberman_4_Coverart.png" alt="Super Bomberman 4">
+        <a href="/snes/bomberman4">Super Bomberman 4</a>
+      </div>
+
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Super_Bomberman_5_Coverart.png" alt="Super Bomberman 5">
+        <a href="/snes/bomberman5">Super Bomberman 5</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+
