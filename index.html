@@ -1,100 +1,281 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SNES Retro Games</title>
   <style>
-    body {
-      font-family: 'Press Start 2P', monospace;
-      background-color: #111;
-      color: #0f0;
-      margin: 0;
-      padding: 0;
+    :root{
+      --bg:#0b0b0b;
+      --panel:#111;
+      --accent:#00ff66;
+      --muted:#7fffb3;
+      --card-w:220px;
     }
-    header {
-      background: #222;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 2px solid #0f0;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, "Press Start 2P", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,#050505 0%, #0b0b0b 100%);
+      color:var(--accent);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    h1 { margin: 0; }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 20px;
+
+    header{
+      background:var(--panel);
+      border-bottom:2px solid rgba(0,255,102,0.08);
+      padding:20px 16px;
+      text-align:center;
     }
-    .card {
-      background: #222;
-      border: 2px solid #0f0;
-      border-radius: 8px;
-      width: 200px;
-      margin: 15px;
-      text-align: center;
-      transition: transform 0.2s;
+    header h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:1px;
     }
-    .card:hover {
-      transform: scale(1.05);
-      border-color: #ff0;
+    header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:11px;
     }
-    .card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-bottom: 2px solid #0f0;
+
+    .wrap{
+      max-width:1200px;
+      margin:28px auto;
+      padding:0 16px 60px;
     }
-    .card a {
-      display: block;
-      padding: 10px;
-      text-decoration: none;
-      color: #0f0;
-      font-size: 14px;
+
+    .controls{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:18px;
+      flex-wrap:wrap;
     }
-    .card a:hover {
-      color: #ff0;
+    .controls .search{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .controls input[type="search"]{
+      background:#0f0f0f;
+      border:1px solid rgba(0,255,102,0.08);
+      color:var(--accent);
+      padding:10px 12px;
+      border-radius:8px;
+      width:320px;
+      max-width:60vw;
+    }
+    .controls .hint{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(var(--card-w),1fr));
+      gap:18px;
+      align-items:start;
+      justify-items:center;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--card-w);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(0,255,102,0.06);
+      border-radius:10px;
+      overflow:hidden;
+      transition:transform .18s ease, box-shadow .18s ease;
+      box-shadow:0 6px 18px rgba(0,0,0,0.6);
+      text-align:left;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.7);
+      border-color:rgba(255,255,0,0.12);
+    }
+
+    .thumb{
+      width:100%;
+      height:120px;
+      background:#000;
+      display:block;
+      object-fit:cover;
+      display:block;
+    }
+    .card-body{
+      padding:12px;
+    }
+    .title{
+      font-size:13px;
+      color:var(--accent);
+      margin:0 0 8px;
+      line-height:1.1;
+    }
+    .meta{
+      font-size:11px;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+    .actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-block;
+      padding:8px 10px;
+      border-radius:8px;
+      text-decoration:none;
+      font-size:12px;
+      color:#000;
+      background:var(--accent);
+      border:1px solid rgba(0,0,0,0.15);
+    }
+    .btn.secondary{
+      background:transparent;
+      color:var(--muted);
+      border:1px solid rgba(0,255,102,0.06);
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      padding:28px 16px;
+      font-size:12px;
+    }
+
+    @media (max-width:520px){
+      .controls input[type="search"]{width:100%}
+      .card{max-width:100%}
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>🎮 SNES Retro Games</h1>
+    <h1>Law Retro Games</h1>
+    <p>Escolha um jogo para abrir a página dedicada</p>
   </header>
 
-  <main>
-    <div class="container">
-      <!-- Super Mario World -->
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/31/Super_Mario_World_Coverart.png" alt="Super Mario World">
-        <a href="snes/smw.html">Super Mario World</a>
+  <div class="wrap">
+    <div class="controls">
+      <div class="search">
+        <input id="search" type="search" placeholder="Pesquisar jogos..." aria-label="Pesquisar jogos">
       </div>
-
-      <!-- Bomberman -->
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/4/4d/Super_Bomberman_Coverart.png" alt="Super Bomberman">
-        <a href="/snes/bomberman1">Super Bomberman</a>
-      </div>
-
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/8/8d/Super_Bomberman_2_Coverart.png" alt="Super Bomberman 2">
-        <a href="/snes/bomberman2">Super Bomberman 2</a>
-      </div>
-
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/2/2a/Super_Bomberman_3_Coverart.png" alt="Super Bomberman 3">
-        <a href="/snes/bomberman3">Super Bomberman 3</a>
-      </div>
-
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/4/4c/Super_Bomberman_4_Coverart.png" alt="Super Bomberman 4">
-        <a href="/snes/bomberman4">Super Bomberman 4</a>
-      </div>
-
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Super_Bomberman_5_Coverart.png" alt="Super Bomberman 5">
-        <a href="/snes/bomberman5">Super Bomberman 5</a>
-      </div>
+      <div class="hint">Use o teclado ou um gamepad para jogar</div>
     </div>
-  </main>
+
+    <div id="grid" class="grid">
+      <!-- Super Mario World -->
+      <article class="card" data-title="Super Mario World">
+        <img class="thumb" loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/3/32/Super_Mario_World_Coverart.png" alt="Capa Super Mario World">
+        <div class="card-body">
+          <h3 class="title">Super Mario World</h3>
+          <div class="meta">SNES • Plataforma</div>
+          <div class="actions">
+            <a class="btn" href="/snes/mario.html">Jogar</a>
+            <a class="btn secondary" href="https://en.wikipedia.org/wiki/Super_Mario_World" target="_blank" rel="noopener">Info</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Super Bomberman -->
+      <article class="card" data-title="Super Bomberman">
+        <img class="thumb" loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Super.Bomberman.Box.Art.SNES.PAL.png/250px-Super.Bomberman.Box.Art.SNES.PAL.png" alt="Capa Super Bomberman">
+        <div class="card-body">
+          <h3 class="title">Super Bomberman</h3>
+          <div class="meta">SNES • Bomberman 1</div>
+          <div class="actions">
+            <a class="btn" href="/snes/bomberman1.html">Jogar</a>
+            <a class="btn secondary" href="https://en.wikipedia.org/wiki/Super_Bomberman" target="_blank" rel="noopener">Info</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Super Bomberman 2 -->
+      <article class="card" data-title="Super Bomberman 2">
+        <img class="thumb" loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/SNES_Super_Bomberman_2_cover_art.jpg/250px-SNES_Super_Bomberman_2_cover_art.jpg" alt="Capa Super Bomberman 2">
+        <div class="card-body">
+          <h3 class="title">Super Bomberman 2</h3>
+          <div class="meta">SNES • Bomberman 2</div>
+          <div class="actions">
+            <a class="btn" href="/snes/bomberman2.html">Jogar</a>
+            <a class="btn secondary" href="https://en.wikipedia.org/wiki/Super_Bomberman_2" target="_blank" rel="noopener">Info</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Super Bomberman 3 -->
+      <article class="card" data-title="Super Bomberman 3">
+        <img class="thumb" loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/SNES_Super_Bomberman_3_cover_art.jpg/250px-SNES_Super_Bomberman_3_cover_art.jpg" alt="Capa Super Bomberman 3">
+        <div class="card-body">
+          <h3 class="title">Super Bomberman 3</h3>
+          <div class="meta">SNES • Bomberman 3</div>
+          <div class="actions">
+            <a class="btn" href="/snes/bomberman3.html">Jogar</a>
+            <a class="btn secondary" href="https://en.wikipedia.org/wiki/Super_Bomberman_3" target="_blank" rel="noopener">Info</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Super Bomberman 4 -->
+      <article class="card" data-title="Super Bomberman 4">
+        <img class="thumb" loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/9/97/SFC_Super_Bomberman_4_cover_art.jpg" alt="Capa Super Bomberman 4">
+        <div class="card-body">
+          <h3 class="title">Super Bomberman 4</h3>
+          <div class="meta">SNES • Bomberman 4</div>
+          <div class="actions">
+            <a class="btn" href="/snes/bomberman4.html">Jogar</a>
+            <a class="btn secondary" href="https://en.wikipedia.org/wiki/Super_Bomberman_4" target="_blank" rel="noopener">Info</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Super Bomberman 5 -->
+      <article class="card" data-title="Super Bomberman 5">
+        <img class="thumb" loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/9/9f/SuperBomberman5.jpg" alt="Capa Super Bomberman 5">
+        <div class="card-body">
+          <h3 class="title">Super Bomberman 5</h3>
+          <div class="meta">SNES • Bomberman 5</div>
+          <div class="actions">
+            <a class="btn" href="/snes/bomberman5.html">Jogar</a>
+            <a class="btn secondary" href="https://en.wikipedia.org/wiki/Super_Bomberman_5" target="_blank" rel="noopener">Info</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Espaço para adicionar mais jogos -->
+      <!-- Copie um bloco article e atualize imagem, título e link -->
+    </div>
+  </div>
+
+  <footer>
+    <div>Crie as páginas dos jogos em /snes/*.html e configure o EmulatorJS em cada uma</div>
+  </footer>
+
+  <script>
+    // Busca simples nos cards
+    const search = document.getElementById('search');
+    const grid = document.getElementById('grid');
+    search.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      const cards = grid.querySelectorAll('.card');
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        card.style.display = title.includes(q) ? '' : 'none';
+      });
+    });
+
+    // Atalho para abrir o primeiro jogo com Enter quando o campo de busca estiver vazio
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && document.activeElement === search && search.value.trim() === '') {
+        const first = grid.querySelector('.card a.btn');
+        if (first) first.click();
+      }
+    });
+  </script>
 </body>
 </html>
 

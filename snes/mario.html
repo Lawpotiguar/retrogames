@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Super Mario World - SNES</title>
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#111;
+      --accent:#00ff66;
+      --muted:#7fffb3;
+      --max-width:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, "Press Start 2P", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background:linear-gradient(180deg,#050505 0%, #0b0b0b 100%);
+      color:var(--accent);
+      -webkit-font-smoothing:antialiased;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+
+    header{
+      background:var(--panel);
+      padding:14px 16px;
+      text-align:center;
+      border-bottom:2px solid rgba(0,255,102,0.06);
+    }
+    header h1{ margin:0; font-size:18px; }
+
+    main{
+      width:100%;
+      max-width:var(--max-width);
+      margin:18px auto;
+      padding:0 16px 28px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      align-items:center;
+      flex:1 0 auto;
+    }
+
+    .back{
+      color:var(--accent);
+      text-decoration:none;
+      font-size:13px;
+      align-self:flex-start;
+      margin-bottom:6px;
+    }
+
+    /* Wrapper que permite o emulador ocupar 100% da largura */
+    .emulator-wrap{
+      width:100%;
+      display:flex;
+      justify-content:center;
+    }
+
+    /* O #game ocupa 100% da largura disponível.
+       A altura é automática, mas limitada para caber na tela inteira.
+       Ajuste os valores de max-height conforme preferir. */
+    #game {
+      width:100%;
+      height:auto;
+      max-height:65vh;        /* garante que o emulador não ocupe toda a tela */
+      min-height:320px;       /* altura mínima para ficar jogável em telas pequenas */
+      border:3px solid var(--accent);
+      background:#000;
+      box-shadow:0 12px 30px rgba(0,0,0,0.6);
+      border-radius:6px;
+      overflow:hidden;
+      display:block;
+    }
+
+    /* Força o canvas/iframe interno do emulator a preencher o container */
+    #game > canvas,
+    #game > iframe,
+    #game > div {
+      width:100% !important;
+      height:100% !important;
+      display:block;
+    }
+
+    /* Se o conteúdo interno não definir altura, garantimos que #game tenha uma altura proporcional à largura mínima */
+    @media (min-width:900px){
+      /* em telas largas, limitar a altura para não ultrapassar a área visível */
+      #game { max-height:72vh; min-height:420px; }
+    }
+    @media (max-width:520px){
+      #game { max-height:55vh; min-height:260px; }
+    }
+
+    .info{
+      width:100%;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(0,255,102,0.04);
+      padding:12px;
+      border-radius:8px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .controls-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    .control-card{
+      background:#0f0f0f;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid rgba(0,255,102,0.04);
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    footer{
+      padding:14px 16px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      border-top:1px solid rgba(255,255,255,0.02);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Super Mario World</h1>
+  </header>
+
+  <main>
+    <a class="back" href="/index.html">← Voltar à lista</a>
+
+    <div class="emulator-wrap">
+      <!-- O emulador preencherá toda a largura do container #game.
+           A altura será controlada pelo CSS (max-height/min-height) para caber na página. -->
+      <div id="game" aria-label="Área do emulador"></div>
+    </div>
+
+    <div class="info" role="region" aria-label="Tutorial de controles">
+      <strong>Como carregar</strong>
+      <div>Substitua a variável <code>EJS_gameUrl</code> no script abaixo pelo link direto (raw) da sua ROM hospedada (ex: Netlify). O emulador será carregado automaticamente.</div>
+
+      <div class="controls-grid" style="margin-top:12px;">
+        <div class="control-card">
+          <strong>Controles padrão (teclado)</strong>
+          <div>Direcional: <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd></div>
+          <div>Pular: <kbd>Z</kbd> ou <kbd>X</kbd></div>
+          <div>Correr/Segurar: <kbd>Shift</kbd></div>
+          <div>Start / Pause: <kbd>Enter</kbd></div>
+        </div>
+
+        <div class="control-card">
+          <strong>Dicas para ghosting</strong>
+          <div>- Se 3 teclas não funcionarem juntas, troque a tecla de correr/pular para outra (ex: <kbd>X</kbd> ou <kbd>C</kbd>).</div>
+          <div>- Gamepad USB/Bluetooth é recomendado (sem ghosting).</div>
+        </div>
+
+        <div class="control-card">
+          <strong>Problemas comuns</strong>
+          <div>- Tela preta: verifique se o link da ROM é o raw e serve binário.</div>
+          <div>- Som ausente: verifique volume do navegador e permissões.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Substitua <code>EJS_gameUrl</code> no script abaixo pelo link direto da sua ROM hospedada</footer>
+
+  <!-- Configuração do EmulatorJS -->
+  <script type="text/javascript">
+    // ** Substitua esta URL pelo link direto (raw) da sua ROM hospedada **
+    // Exemplo: "https://seusite.netlify.app/roms/smw.sfc"
+    EJS_gameUrl = "https://SEU_SITE.netlify.app/roms/smw.sfc";
+
+    // Configurações do player
+    EJS_player = '#game';
+    EJS_core = 'snes';
+    EJS_mouse = false;
+    EJS_multitap = false;
+
+    // Carrega o loader do EmulatorJS (remove instâncias anteriores)
+    (function loadEJS(){
+      const old = document.querySelector('script[src*="emulatorjs.com/loader.js"]');
+      if(old) old.remove();
+      const s = document.createElement('script');
+      s.src = "https://www.emulatorjs.com/loader.js";
+      s.defer = true;
+      document.body.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
+

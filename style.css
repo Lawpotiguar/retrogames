@@ -1,0 +1,31 @@
+body {
+  font-family: 'Press Start 2P', monospace;
+  background-color: #111;
+  color: #0f0;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #222;
+  padding: 20px;
+  border-bottom: 2px solid #0f0;
+}
+
+h1 {
+  margin: 0;
+}
+
+.controls {
+  margin: 20px;
+}
+
+input, button {
+  padding: 10px;
+  border: 2px solid #0f0;
+  background: #222;
+  color: #0f0;
+  cursor: pointer;
+}
+
